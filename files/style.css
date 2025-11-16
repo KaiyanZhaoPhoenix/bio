@@ -17,20 +17,20 @@
 }
 
 body {
-  background-color: #FFFFFF; /* 柔和的浅灰蓝背景 */
-  color: #2E2E2E; /* 深灰字体，增强对比 */
+  background-color: #FFFFFF; 
+  color: #2E2E2E; 
   font-family: 'Lato', Calibri, 'sans-serif';
 }
 
 /* 文字、段落与标题样式 */
 p, li, h1, h2, h3, h4 {
-  color: #4A4A4A; /* 中灰色文字 */
-  line-height: 22px; /* 提高可读性 */
+  color: #4A4A4A; 
+  line-height: 22px; 
 }
 
 /* 链接样式 */
 a:link {
-  color: #00509E; /* 深邃蓝色 */
+  color: #00509E; 
 }
 
 a:visited {
@@ -38,24 +38,24 @@ a:visited {
 }
 
 a:hover {
-  color: #6AB0F3; /* 亮蓝色 */
+  color: #6AB0F3; 
 }
 
 a:active {
   color: #00509E;
 }
 
-/* 边栏样式 */
+/* 边栏样式 (如果未来使用) */
 #sidebar-wrapper {
-  background-color: #FFFFFF; /* 白色背景 */
+  background-color: #FFFFFF; 
 }
 
 .sidebar-nav li a {
-  color: #333333; /* 深灰色 */
+  color: #333333; 
 }
 
 .singlecolor {
-  color: #00509E; /* 统一蓝色调 */
+  color: #00509E; 
 }
 
 /* 头部链接 */
@@ -82,62 +82,142 @@ a:active {
   line-height: 25px;
 }
 
-/* Timeline部分保留原样 */
-.timeline {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 18px;
-  position: relative;
-  padding-top: 20px;
-  padding-bottom: 0px;
+/* ======== 新增/修改样式开始 (V3) ======== */
+
+/* 限制 container 最大宽度，使其不大于 1000px */
+.container {
+    max-width: 970px;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 82px;
-  top: 40px;
-  bottom: 20px;
-  border-left: 3px solid #5b87bc; /* 深蓝色时间线 */
-  z-index: 0;
+/* 视觉分割线 */
+.section-divider {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    border: 0;
+    border-top: 1px solid #eeeeee;
 }
 
-.entry {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+/* News 滚动容器 */
+.news-scroll-container {
+    max-height: 180px; /* 您可以在这里调整固定高度 */
+    overflow-y: auto;
+    border: none; /* 去除边框 */
+    padding: 5px 15px 5px 5px; /* 增加一些内边距，特别是右侧为滚动条留出空间 */
+    /* 核心：底部淡出效果 */
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 
-.timespan {
-  margin-right: 10px;
-  white-space: nowrap;
+/* 美化滚动条 (仅在 Webkit 浏览器生效, 如 Chrome, Safari, Edge) */
+.news-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+.news-scroll-container::-webkit-scrollbar-track {
+    background: transparent; /* 轨道透明 */
+}
+.news-scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ddd; /* 滚动条颜色 */
+    border-radius: 6px;
+}
+.news-scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #bbb; /* 悬停时颜色 */
 }
 
-.ico .entry-dot {
-  width: 15px;
-  height: 15px;
-  background-color: #5b87bc;
-  border-radius: 50%;
-  margin-right: 10px;
-  border: 2px solid white;
-  z-index: 1;
+/* News 列表间距 */
+.news-list li {
+    margin-bottom: 12px; /* 略微拉开行距 */
 }
 
-.ico .logo {
-  max-height: 60px;
-  padding-top: 8px;
+/* Publication 宽高比容器 */
+.publication-image-box {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* 固定 4:3 宽高比 */
+    overflow: hidden;   /* 裁剪溢出的图片部分 */
+    border-radius: 12px; /* 统一圆角 */
+    background-color: #f9f9f9; /* 为未填满的图片(如gif)提供背景 */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out; /* 新增 transform */
 }
 
-/* 图片样式 */
+/* 新增：图片链接的悬停效果和光标 */
+.publication-image-link {
+    display: block; /* 确保 <a> 标签占满空间 */
+}
+.publication-image-link:hover .publication-image-box {
+    cursor: zoom-in; /* 鼠标变为放大镜 */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+    transform: scale(1.02); /* 轻微放大 */
+}
+
+/* Publication 图片缩放样式 */
+.publication-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 关键：使图片填满容器，自动缩放和裁剪 */
+    padding-top: 0 !important; 
+    border-radius: 0; 
+    box-shadow: none; 
+    /* 修复 .rounded-shadow 带来的额外圆角 */
+    border-radius: inherit; 
+}
+
+/* Publication 条目间距 */
+.publication-entry {
+    margin-bottom: 35px; /* 增加条目间距 */
+}
+
+/* Publication 链接按钮样式 (更微妙) */
+.pub-links {
+    margin-top: 10px;
+}
+.pub-links a {
+    color: #00509E; /* 使用主题链接色 */
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 8px;
+    margin-right: 5px;
+    margin-bottom: 5px; 
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+    display: inline-block; 
+}
+.pub-links a:hover {
+    background-color: #f0f5f9; /* 极淡的蓝色背景 */
+    text-decoration: none;
+    color: #004085;
+}
+.pub-links a.disabled {
+    color: #aaa;
+    pointer-events: none; 
+    background-color: transparent;
+}
+.pub-links a.link-primary {
+    font-weight: 700;
+    color: #004085;
+}
+
+/* 新增：Modal 模态框样式 */
+.modal-dialog {
+    margin-top: 50px; /* 距离顶部留出空间 */
+}
+#modalImage {
+    width: 100%; /* 图片宽度自适应模态框 */
+    height: auto;
+    border-radius: 5px;
+}
+.modal-header .close {
+    font-size: 30px;
+    margin-top: -5px;
+}
+
+/* ======== 新增/修改样式结束 (V3) ======== */
+
+
+/* 图片样式 - .rounded-shadow 现在被 .publication-image-box 使用 */
 img.rounded-shadow {
   border-radius: 15px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 柔和阴影 */
-  transition: box-shadow 0.3s ease-in-out;
-}
-
-img.shadow {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
   transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -173,23 +253,63 @@ footer h5 {
 #news p {
   font-size: 14px;
   color: #787878;
+  margin-bottom: 0; 
 }
 
-/* 媒体查询 */
-@media (max-width: 1000px) {
+/* 媒体查询 (响应式) */
+@media (max-width: 991px) {
+  .name-header {
+      text-align: center; 
+  }
+  .email-info, .bio {
+      text-align: center; 
+  }
   .img-responsive-profile {
-    width: 35%;
-    margin-bottom: 15px;
-  }
-
-  .img-responsive {
-    width: 45%;
-    margin-bottom: 15px;
+    max-width: 250px; 
+    width: auto; 
+    margin-bottom: 20px;
+    display: inline-block; 
   }
 }
 
-/* Container 宽度 */
-.container-fluid {
-    width: 850px;
-    display: block;
+/* 原有的 .timeline, .entry, .timespan, .ico 等样式被保留 */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 18px;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 0px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 82px;
+  top: 40px;
+  bottom: 20px;
+  border-left: 3px solid #5b87bc; 
+  z-index: 0;
+}
+.entry {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.timespan {
+  margin-right: 10px;
+  white-space: nowrap;
+}
+.ico .entry-dot {
+  width: 15px;
+  height: 15px;
+  background-color: #5b87bc;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid white;
+  z-index: 1;
+}
+.ico .logo {
+  max-height: 60px;
+  padding-top: 8px;
 }

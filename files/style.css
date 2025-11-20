@@ -65,7 +65,7 @@ a:hover { opacity: 0.8; text-decoration: none; color: var(--text-link); }
 }
 body.dark-mode .ambient-light { opacity: 0.3; }
 
-.container { max-width: 800px; padding: 0 20px; margin: 0 auto; }
+.container { max-width: 850px; padding: 0 20px; margin: 0 auto; }
 
 /* =========================================
    1. Nav
@@ -151,7 +151,7 @@ body.dark-mode .ambient-light { opacity: 0.3; }
 
 /* 核心修改：头像变为圆角矩形 (Squircle) */
 .avatar-img {
-    width: 240px; height: 210px; object-fit: cover;
+    width: 260px; height: 210px; object-fit: cover;
     border-radius: 32px; /* 圆角大小 */
     box-shadow: var(--shadow-lg); transition: transform 0.3s ease;
     border: 1px solid var(--border-color);
